@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Export — Arcanum</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #04020d;
+    --glow: #b48fff;
+    --glow2: #7dd3fc;
+    --glow3: #f0abfc;
+    --text: #d4c8ff;
+    --text-dim: #7a6fa8;
+    --text-bright: #f0ecff;
+    --accent: #c084fc;
+    --border: rgba(180,143,255,0.15);
+    --border-bright: rgba(180,143,255,0.35);
+  }
+
+  body {
+    background: transparent;
+    color: var(--text);
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 24px 28px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--glow) transparent;
+  }
+  body::-webkit-scrollbar { width: 4px; }
+  body::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); border-radius: 2px; }
+  body::-webkit-scrollbar-thumb { background: var(--glow); border-radius: 2px; }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--glow);
+    margin-bottom: 16px;
+  }
+
+  .section {
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .world-export-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(180,143,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: border-color 0.2s;
+  }
+  .world-export-row:hover { border-color: var(--border-bright); }
+
+  .world-row-left { display: flex; align-items: center; gap: 12px; }
+  .world-row-icon { font-size: 20px; }
+  .world-row-name {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--text-bright);
+  }
+  .world-row-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  .btn-export {
+    background: rgba(180,143,255,0.1);
+    border: 1px solid var(--border-bright);
+    border-radius: 7px;
+    color: var(--glow);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn-export:hover { background: rgba(180,143,255,0.2); }
+  .btn-export:active { transform: scale(0.97); }
+  .btn-export.downloading { opacity: 0.6; pointer-events: none; }
+
+  .empty-msg {
+    text-align: center;
+    padding: 32px;
+    color: var(--text-dim);
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  /* Import */
+  .import-drop {
+    border: 2px dashed var(--border-bright);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(180,143,255,0.03);
+  }
+  .import-drop:hover, .import-drop.drag-over {
+    border-color: var(--glow);
+    background: rgba(180,143,255,0.08);
+  }
+  .import-drop-icon { font-size: 28px; margin-bottom: 10px; }
+  .import-drop-label {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+  .import-drop-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  #import-file-input { display: none; }
+
+  .import-status {
+    margin-top: 14px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    display: none;
+  }
+  .import-status.success {
+    display: block;
+    background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.3);
+    color: #4ade80;
+  }
+  .import-status.error {
+    display: block;
+    background: rgba(248,113,113,0.1);
+    border: 1px solid rgba(248,113,113,0.3);
+    color: #f87171;
+  }
+
+  .note {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+  <div class="section">
+    <div class="section-title">Export Worlds</div>
+    <div id="worlds-list"><div class="empty-msg">Loading worlds…</div></div>
+    <p class="note">Each world exports as a single <code style="font-family:'JetBrains Mono',monospace;color:var(--glow2)">.json</code> file containing all tabs and entries. You can re-import it any time.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Import</div>
+    <div class="import-drop" id="import-drop" onclick="document.getElementById('import-file-input').click()">
+      <div class="import-drop-icon">📥</div>
+      <div class="import-drop-label">Drop a world JSON here</div>
+      <div class="import-drop-sub">or click to browse</div>
+    </div>
+    <input type="file" id="import-file-input" accept=".json">
+    <div class="import-status" id="import-status"></div>
+  </div>
+
+<script>
+  let appData = null;
+
+  // Receive data from parent
+  window.addEventListener('message', e => {
+    if (e.data?.type === 'export-data') {
+      appData = e.data.data;
+      renderWorlds();
+    }
+    if (e.data?.type === 'set-theme') {
+      document.documentElement.setAttribute('data-theme', e.data.theme || '');
+      applyThemeVars(e.data.vars || {});
+    }
+    if (e.data?.type === 'import-done') {
+      showStatus('success', `✓ "${e.data.worldName}" imported successfully. Reload to see it.`);
+    }
+    if (e.data?.type === 'import-error') {
+      showStatus('error', '✕ Import failed: ' + e.data.message);
+    }
+  });
+
+  function applyThemeVars(vars) {
+    const root = document.documentElement;
+    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+  }
+
+  // Ask parent for data on load
+  window.parent.postMessage({ type: 'request-export-data' }, '*');
+  window.parent.postMessage({ type: 'request-theme' }, '*');
+
+  function renderWorlds() {
+    const el = document.getElementById('worlds-list');
+    if (!appData || !appData.worlds || appData.worlds.length === 0) {
+      el.innerHTML = '<div class="empty-msg">No worlds found. Create one first!</div>';
+      return;
+    }
+    el.innerHTML = appData.worlds.map(w => {
+      const tabs = (appData.tabs || []).filter(t => t.worldId === w.id);
+      const entryCount = tabs.reduce((s, t) => s + ((appData.entries || {})[t.id] || []).length, 0);
+      return `<div class="world-export-row">
+        <div class="world-row-left">
+          <span class="world-row-icon">${w.icon || '🌍'}</span>
+          <div>
+            <div class="world-row-name">${escHtml(w.name)}</div>
+            <div class="world-row-meta">${tabs.length} tab${tabs.length !== 1 ? 's' : ''} · ${entryCount} entr${entryCount !== 1 ? 'ies' : 'y'}</div>
+          </div>
+        </div>
+        <button class="btn-export" onclick="exportWorld('${w.id}')">↓ Download</button>
+      </div>`;
+    }).join('');
+  }
+
+  function escHtml(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function exportWorld(worldId) {
+    if (!appData) return;
+    const world = appData.worlds.find(w => w.id === worldId);
+    if (!world) return;
+    const tabs = (appData.tabs || []).filter(t => t.worldId === worldId);
+    const entries = {};
+    tabs.forEach(t => { entries[t.id] = (appData.entries || {})[t.id] || []; });
+
+    const payload = {
+      arcanum_export: true,
+      version: '1.2.0',
+      exported_at: new Date().toISOString(),
+      world,
+      tabs,
+      entries
+    };
+
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${world.name.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  // Import
+  const drop = document.getElementById('import-drop');
+  const fileInput = document.getElementById('import-file-input');
+
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag-over'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('drag-over'));
+  drop.addEventListener('drop', e => {
+    e.preventDefault(); drop.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) processImport(file);
+  });
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) processImport(fileInput.files[0]);
+  });
+
+  function processImport(file) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (!data.arcanum_export) throw new Error('Not a valid Arcanum export file.');
+        if (!data.world || !data.tabs) throw new Error('Missing world or tabs data.');
+        // Send to parent to handle DB write
+        window.parent.postMessage({ type: 'import-world', data }, '*');
+        showStatus('success', `✓ Importing "${data.world.name}"…`);
+      } catch(err) {
+        showStatus('error', '✕ ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function showStatus(type, msg) {
+    const el = document.getElementById('import-status');
+    el.textContent = msg;
+    el.className = 'import-status ' + type;
+  }
+</script>
+</body>
+</html>
