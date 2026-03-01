@@ -1,6 +1,6 @@
 [
   {
-    "version: "1.3.0",
+    "version": "1.3.0",
     "date": "2026-03-02",
     "entries": [
       { "tag": "upd", "text": "Themes disabled for indefinite period. Rework needed" },
