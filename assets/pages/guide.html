@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup Guide — Arcanum</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #04020d;
+    --deep: #080418;
+    --glow: #b48fff;
+    --glow2: #7dd3fc;
+    --glow3: #f0abfc;
+    --text: #d4c8ff;
+    --text-dim: #7a6fa8;
+    --text-bright: #f0ecff;
+    --border: rgba(180,143,255,0.15);
+    --border-bright: rgba(180,143,255,0.35);
+  }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    scrollbar-width: none;
+  }
+  body::-webkit-scrollbar { display: none; width: 0; }
+
+  .bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(100,30,200,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(20,80,180,0.10) 0%, transparent 70%);
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 64px 32px 100px;
+  }
+
+  /* Header */
+  .header { margin-bottom: 56px; }
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: 36px; font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 14px; color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* Tab switcher */
+  .tab-bar {
+    display: flex; gap: 4px;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 8px 16px;
+    border: none; background: transparent;
+    color: var(--text-dim); cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--glow); border-bottom-color: var(--glow); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Step */
+  .step {
+    margin-bottom: 48px;
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px;
+  }
+  .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    color: var(--glow);
+    background: rgba(180,143,255,0.08);
+    border: 1px solid var(--border-bright);
+    border-radius: 20px;
+    padding: 3px 10px;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-family: 'Cinzel', serif;
+    font-size: 16px; font-weight: 600;
+    color: var(--text-bright);
+    letter-spacing: 0.04em;
+  }
+
+  .step-body {
+    padding-left: 0;
+  }
+  .step-desc {
+    font-size: 14px; color: var(--text-dim);
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+  .step-desc code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--glow2);
+    background: rgba(125,211,252,0.08);
+    padding: 1px 6px; border-radius: 4px;
+  }
+
+  /* Image placeholder */
+  .step-img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 8px;
+    background: rgba(255,255,255,0.02);
+    position: relative;
+  }
+  .step-img img {
+    width: 100%; display: block;
+    border-radius: 10px;
+  }
+  .step-img-placeholder {
+    width: 100%; height: 200px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.08em;
+  }
+  .step-img-placeholder-icon { font-size: 24px; opacity: 0.3; }
+  .step-img-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.06em;
+    color: var(--text-dim);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  /* Note / tip box */
+  .note {
+    display: flex; gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 13px; line-height: 1.6;
+  }
+  .note-tip  { background: rgba(125,211,252,0.06); border: 1px solid rgba(125,211,252,0.2); color: var(--text-dim); }
+  .note-warn { background: rgba(251,191,36,0.06);  border: 1px solid rgba(251,191,36,0.2);  color: var(--text-dim); }
+  .note-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  /* Divider between steps */
+  .step-divider {
+    border: none;
+    border-top: 1px solid rgba(180,143,255,0.06);
+    margin: 0 0 48px;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px; color: var(--text-dim);
+    font-style: italic;
+  }
+  .footer a { color: var(--glow2); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* Custom scrollbar */
+  .scrollbar-track {
+    position: fixed; right: 4px; top: 4px; bottom: 4px;
+    width: 3px; border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+    z-index: 999; pointer-events: none;
+  }
+  .scrollbar-thumb {
+    position: absolute; left: 0; right: 0;
+    border-radius: 3px;
+    background: var(--glow);
+    opacity: 0.4;
+    transition: opacity 0.2s;
+    min-height: 32px;
+  }
+  body:hover .scrollbar-thumb { opacity: 0.8; }
+</style>
+</head>
+<body>
+
+<div class="scrollbar-track"><div class="scrollbar-thumb" id="sb-thumb"></div></div>
+<div class="bg"></div>
+
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-title">SETUP GUIDE</div>
+    <div class="header-sub">How to connect Arcanum to your database</div>
+  </div>
+
+  <!-- Tab bar -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('supabase', this)">Supabase</button>
+    <button class="tab-btn" onclick="switchTab('turso', this)">Turso</button>
+  </div>
+
+  <!-- ── SUPABASE ── -->
+  <div class="tab-panel active" id="tab-supabase">
+
+    <div class="step" style="animation-delay:0s">
+      <div class="step-header">
+        <span class="step-num">Step 01</span>
+        <span class="step-title">Create a Supabase account</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Go to <code>supabase.com</code> and sign up for a free account. No credit card required. Once signed in, you'll land on your dashboard.</p>
+        <div class="step-img">
+          <div class="step-img-placeholder">
+            <span class="step-img-placeholder-icon">🖼️</span>
+            <span>supabase-signup.png</span>
+          </div>
+        </div>
+        <div class="step-img-caption">Supabase homepage — click "Start your project"</div>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step" style="animation-delay:0.06s">
+      <div class="step-header">
+        <span class="step-num">Step 02</span>
+        <span class="step-title">Create a new project</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Click <code>New Project</code>, give it a name (e.g. <code>arcanum</code>), set a strong database password, and choose your region. Click <code>Create new project</code> and wait for it to provision — takes about 30 seconds.</p>
+        <div class="step-img">
+          <div class="step-img-placeholder">
+            <span class="step-img-placeholder-icon">🖼️</span>
+            <span>supabase-new-project.png</span>
+          </div>
+        </div>
+        <div class="step-img-caption">New project form — name, password, and region</div>
+        <div class="note note-warn">
+          <span class="note-icon">⚠️</span>
+          <span>Save your database password somewhere safe — you won't be able to see it again.</span>
+        </div>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step" style="animation-delay:0.12s">
+      <div class="step-header">
+        <span class="step-num">Step 03</span>
+        <span class="step-title">Get your Project URL and API key</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Once the project is ready, go to <code>Project Settings → API</code>. Copy the <code>Project URL</code> and the <code>anon public</code> key — you'll need both to connect Arcanum.</p>
+        <div class="step-img">
+          <div class="step-img-placeholder">
+            <span class="step-img-placeholder-icon">🖼️</span>
+            <span>supabase-api-keys.png</span>
+          </div>
+        </div>
+        <div class="step-img-caption">Settings → API — copy the Project URL and anon key</div>
+        <div class="note note-tip">
+          <span class="note-icon">💡</span>
+          <span>Use the <code>anon</code> key, not the <code>service_role</code> key. The anon key is safe to use in the browser.</span>
+        </div>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step" style="animation-delay:0.18s">
+      <div class="step-header">
+        <span class="step-num">Step 04</span>
+        <span class="step-title">Connect in Arcanum</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Open Arcanum, click the <code>⚙ Settings</code> button, and go to the <code>Database</code> tab. Select <code>Supabase</code> as your provider, paste in your Project URL and anon key, then click <code>Connect</code>. Arcanum will create the required tables automatically.</p>
+        <div class="step-img">
+          <div class="step-img-placeholder">
+            <span class="step-img-placeholder-icon">🖼️</span>
+            <span>arcanum-db-connect.png</span>
+          </div>
+        </div>
+        <div class="step-img-caption">Arcanum Settings → Database — paste your credentials</div>
+        <div class="note note-tip">
+          <span class="note-icon">💡</span>
+          <span>Your credentials are stored in <code>localStorage</code> — they stay on your device and are never sent anywhere except directly to Supabase.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── TURSO ── -->
+  <div class="tab-panel" id="tab-turso">
+
+    <div class="step" style="animation-delay:0s">
+      <div class="step-header">
+        <span class="step-num">Step 01</span>
+        <span class="step-title">Create a Turso account</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Go to <code>turso.tech</code> and sign up. Turso has a generous free tier — 500 databases, 9GB storage. Sign in with GitHub for the quickest setup.</p>
+        <div class="step-img">
+          <div class="step-img-placeholder">
+            <span class="step-img-placeholder-icon">🖼️</span>
+            <span>turso-signup.png</span>
+          </div>
+        </div>
+        <div class="step-img-caption">Turso homepage — sign up with GitHub</div>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step" style="animation-delay:0.06s">
+      <div class="step-header">
+        <span class="step-num">Step 02</span>
+        <span class="step-title">Create a database</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">From your Turso dashboard, click <code>Create Database</code>. Give it a name like <code>arcanum</code> and pick a region close to you. Click <code>Create Database</code> to confirm.</p>
+        <div class="step-img">
+          <div class="step-img-placeholder">
+            <span class="step-img-placeholder-icon">🖼️</span>
+            <span>turso-create-db.png</span>
+          </div>
+        </div>
+        <div class="step-img-caption">Turso dashboard — create a new database</div>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step" style="animation-delay:0.12s">
+      <div class="step-header">
+        <span class="step-num">Step 03</span>
+        <span class="step-title">Get your Database URL and token</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Open your database and go to <code>Generate Token</code>. Set expiry to <code>No expiry</code> and click <code>Generate</code>. Copy the token. Also copy the <code>Database URL</code> shown at the top — it looks like <code>libsql://your-db.turso.io</code>.</p>
+        <div class="step-img">
+          <div class="step-img-placeholder">
+            <span class="step-img-placeholder-icon">🖼️</span>
+            <span>turso-token.png</span>
+          </div>
+        </div>
+        <div class="step-img-caption">Turso database page — generate a token and copy the URL</div>
+        <div class="note note-warn">
+          <span class="note-icon">⚠️</span>
+          <span>Copy the token immediately — Turso only shows it once.</span>
+        </div>
+      </div>
+    </div>
+    <hr class="step-divider">
+
+    <div class="step" style="animation-delay:0.18s">
+      <div class="step-header">
+        <span class="step-num">Step 04</span>
+        <span class="step-title">Connect in Arcanum</span>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Open Arcanum, go to <code>Settings → Database</code>, select <code>Turso</code>, paste your Database URL and token, and click <code>Connect</code>. Tables are created automatically on first connect.</p>
+        <div class="step-img">
+          <div class="step-img-placeholder">
+            <span class="step-img-placeholder-icon">🖼️</span>
+            <span>arcanum-turso-connect.png</span>
+          </div>
+        </div>
+        <div class="step-img-caption">Arcanum Settings → Database — select Turso and paste credentials</div>
+        <div class="note note-tip">
+          <span class="note-icon">💡</span>
+          <span>Turso works great if you're already using it for other projects — you can reuse the same account across multiple Arcanum instances with separate databases.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Arcanum — built with ♥ by <a href="https://supernova0866.github.io/Lore/" target="_blank">Nova</a>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+    setTimeout(updateScrollbar, 50);
+  }
+
+  // Custom scrollbar
+  function updateScrollbar() {
+    const thumb = document.getElementById('sb-thumb');
+    if (!thumb) return;
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    if (scrollable <= 0) { thumb.style.display = 'none'; return; }
+    thumb.style.display = '';
+    const trackH = doc.clientHeight - 8;
+    const thumbH = Math.max(32, (doc.clientHeight / doc.scrollHeight) * trackH);
+    const thumbTop = (window.scrollY / scrollable) * (trackH - thumbH);
+    thumb.style.height = thumbH + 'px';
+    thumb.style.top = thumbTop + 'px';
+  }
+  window.addEventListener('scroll', updateScrollbar);
+  window.addEventListener('resize', updateScrollbar);
+  setTimeout(updateScrollbar, 100);
+</script>
+</body>
+</html>
