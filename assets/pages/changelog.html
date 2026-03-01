@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — Arcanum</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #04020d;
+    --deep: #080418;
+    --glow: #b48fff;
+    --glow2: #7dd3fc;
+    --glow3: #f0abfc;
+    --text: #d4c8ff;
+    --text-dim: #7a6fa8;
+    --text-bright: #f0ecff;
+    --border: rgba(180,143,255,0.15);
+    --border-bright: rgba(180,143,255,0.35);
+  }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    scrollbar-width: none;
+  }
+  body::-webkit-scrollbar { display: none; width: 0; }
+
+  /* Starfield */
+  .bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(100,30,200,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(20,80,180,0.10) 0%, transparent 70%);
+  }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 64px 32px 100px;
+  }
+
+  /* Header */
+  .header {
+    margin-bottom: 56px;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-dim); text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--glow); }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: 36px; font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 14px; color: var(--text-dim);
+    font-style: italic;
+  }
+
+  /* Controls */
+  .controls {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim);
+    margin-right: 4px;
+  }
+  .filter-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent; color: var(--text-dim);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--border-bright); color: var(--text); }
+  .filter-btn.active { background: rgba(180,143,255,0.1); border-color: var(--glow); color: var(--glow); }
+  .filter-btn.active-new  { background: rgba(74,222,128,0.08); border-color: rgba(74,222,128,0.4); color: #4ade80; }
+  .filter-btn.active-imp  { background: rgba(125,211,252,0.08); border-color: rgba(125,211,252,0.4); color: #7dd3fc; }
+  .filter-btn.active-fix  { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.4); color: #fbbf24; }
+
+  .sort-btn {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent; color: var(--text-dim);
+    cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .sort-btn:hover { border-color: var(--border-bright); color: var(--text); }
+
+  /* Version block */
+  .version-block {
+    margin-bottom: 48px;
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .version-header {
+    display: flex; align-items: baseline; gap: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .version-num {
+    font-family: 'Cinzel', serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--text-bright);
+    letter-spacing: 0.06em;
+  }
+  .version-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-dim);
+  }
+  .version-count {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  .entry {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(180,143,255,0.05);
+    transition: opacity 0.2s;
+  }
+  .entry:last-child { border-bottom: none; }
+  .entry.hidden { display: none; }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 2px 8px; border-radius: 4px;
+    flex-shrink: 0; margin-top: 3px;
+    width: 38px; text-align: center;
+  }
+  .tag-new { background: rgba(74,222,128,0.12);  color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
+  .tag-imp { background: rgba(125,211,252,0.12); color: #7dd3fc; border: 1px solid rgba(125,211,252,0.25); }
+  .tag-fix { background: rgba(251,191,36,0.12);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+
+  .entry-text { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+  /* Empty state */
+  .empty {
+    text-align: center; padding: 48px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.08em;
+    display: none;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 12px; color: var(--text-dim);
+    font-style: italic;
+  }
+  .footer a { color: var(--glow2); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* Custom scrollbar */
+  .scrollbar-track {
+    position: fixed; right: 4px; top: 4px; bottom: 4px;
+    width: 3px; border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+    z-index: 999; pointer-events: none;
+  }
+  .scrollbar-thumb {
+    position: absolute; left: 0; right: 0;
+    border-radius: 3px;
+    background: var(--glow);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    min-height: 32px;
+  }
+  body:hover .scrollbar-thumb { opacity: 0.8; }
+    text-align: center; padding: 80px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+  .dots span {
+    animation: blink 1.2s infinite;
+    opacity: 0;
+  }
+  .dots span:nth-child(2) { animation-delay: 0.2s; }
+  .dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,100%{opacity:0} 50%{opacity:1} }
+</style>
+</head>
+<body>
+
+<div class="scrollbar-track"><div class="scrollbar-thumb" id="sb-thumb"></div></div>
+
+<div class="bg"></div>
+
+<div class="wrap">
+  <div class="header">
+<div class="header-title">CHANGELOG</div>
+    <div class="header-sub">A full history of changes to Arcanum</div>
+  </div>
+
+  <div class="controls" id="controls" style="display:none">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" data-filter="new" onclick="setFilter('new', this)">New</button>
+    <button class="filter-btn" data-filter="imp" onclick="setFilter('imp', this)">Improved</button>
+    <button class="filter-btn" data-filter="fix" onclick="setFilter('fix', this)">Fixed</button>
+    <button class="sort-btn" id="sort-btn" onclick="toggleSort()">
+      <span id="sort-icon">↓</span> <span id="sort-label">Newest first</span>
+    </button>
+  </div>
+
+  <div id="loading">
+    Loading<span class="dots"><span>.</span><span>.</span><span>.</span></span>
+  </div>
+
+  <div id="changelog" style="display:none"></div>
+  <div class="empty" id="empty">No entries match this filter</div>
+
+  <div class="footer">
+    Arcanum — built with ♥ by <a href="https://supernova0866.github.io/Lore/" target="_blank">Nova</a>
+  </div>
+</div>
+
+<script>
+  let data = [];
+  let sortAsc = false; // newest first by default
+  let activeFilter = 'all';
+
+  async function load() {
+    try {
+      const resp = await fetch('../changelog.json');
+      if (!resp.ok) throw new Error();
+      data = await resp.json();
+    } catch(e) {
+      document.getElementById('loading').textContent = 'Could not load changelog.json';
+      return;
+    }
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('changelog').style.display = '';
+    document.getElementById('controls').style.display = 'flex';
+    render();
+  }
+
+  function render() {
+    const container = document.getElementById('changelog');
+    const sorted = sortAsc ? [...data].reverse() : [...data];
+
+    let totalVisible = 0;
+    container.innerHTML = sorted.map((v, i) => {
+      const entries = v.entries.filter(e => activeFilter === 'all' || e.tag === activeFilter);
+      if (entries.length === 0) return '';
+      totalVisible += entries.length;
+
+      const date = new Date(v.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+      return `
+        <div class="version-block" style="animation-delay:${i * 0.06}s">
+          <div class="version-header">
+            <span class="version-num">v${v.version}</span>
+            <span class="version-date">${date}</span>
+            <span class="version-count">${entries.length} change${entries.length !== 1 ? 's' : ''}</span>
+          </div>
+          ${entries.map(e => `
+            <div class="entry">
+              <span class="tag tag-${e.tag}">${e.tag}</span>
+              <span class="entry-text">${e.text}</span>
+            </div>`).join('')}
+        </div>`;
+    }).join('');
+
+    document.getElementById('empty').style.display = totalVisible === 0 ? 'block' : 'none';
+  }
+
+  function setFilter(filter, btn) {
+    activeFilter = filter;
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.className = 'filter-btn';
+      if (b === btn) b.classList.add(filter === 'all' ? 'active' : `active-${filter}`);
+    });
+    render();
+  }
+
+  function toggleSort() {
+    sortAsc = !sortAsc;
+    document.getElementById('sort-icon').textContent = sortAsc ? '↑' : '↓';
+    document.getElementById('sort-label').textContent = sortAsc ? 'Oldest first' : 'Newest first';
+    render();
+  }
+
+  load();
+
+  // Custom scrollbar
+  function updateScrollbar() {
+    const thumb = document.getElementById('sb-thumb');
+    if (!thumb) return;
+    const doc = document.documentElement;
+    const scrollable = doc.scrollHeight - doc.clientHeight;
+    if (scrollable <= 0) { thumb.style.display = 'none'; return; }
+    thumb.style.display = '';
+    const trackH = doc.clientHeight - 8;
+    const thumbH = Math.max(32, (doc.clientHeight / doc.scrollHeight) * trackH);
+    const thumbTop = (window.scrollY / scrollable) * (trackH - thumbH);
+    thumb.style.height = thumbH + 'px';
+    thumb.style.top = thumbTop + 'px';
+  }
+  window.addEventListener('scroll', updateScrollbar);
+  window.addEventListener('resize', updateScrollbar);
+  setTimeout(updateScrollbar, 100);
+</script>
+</body>
+</html>
