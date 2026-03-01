@@ -114,6 +114,7 @@
   .filter-btn.active-new  { background: rgba(74,222,128,0.08); border-color: rgba(74,222,128,0.4); color: #4ade80; }
   .filter-btn.active-imp  { background: rgba(125,211,252,0.08); border-color: rgba(125,211,252,0.4); color: #7dd3fc; }
   .filter-btn.active-fix  { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.4); color: #fbbf24; }
+  .filter-btn.active-upd  { background: rgba(192,132,252,0.08); border-color: rgba(192,132,252,0.4); color: #c084fc; }
 
   .sort-btn {
     margin-left: auto;
@@ -179,6 +180,7 @@
   .tag-new { background: rgba(74,222,128,0.12);  color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
   .tag-imp { background: rgba(125,211,252,0.12); color: #7dd3fc; border: 1px solid rgba(125,211,252,0.25); }
   .tag-fix { background: rgba(251,191,36,0.12);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+  .tag-upd { background: rgba(192,132,252,0.12); color: #c084fc; border: 1px solid rgba(192,132,252,0.25); }
 
   .entry-text { font-size: 14px; color: var(--text); line-height: 1.6; }
 
@@ -250,6 +252,7 @@
     <button class="filter-btn" data-filter="new" onclick="setFilter('new', this)">New</button>
     <button class="filter-btn" data-filter="imp" onclick="setFilter('imp', this)">Improved</button>
     <button class="filter-btn" data-filter="fix" onclick="setFilter('fix', this)">Fixed</button>
+    <button class="filter-btn" data-filter="upd" onclick="setFilter('upd', this)">Updated</button>
     <button class="sort-btn" id="sort-btn" onclick="toggleSort()">
       <span id="sort-icon">↓</span> <span id="sort-label">Newest first</span>
     </button>
