@@ -1095,36 +1095,6 @@
     text-transform: uppercase;
     margin-bottom: 32px;
   }
-  .setup-desc {
-    font-size: 14px;
-    color: var(--text-dim);
-    font-style: italic;
-    line-height: 1.6;
-    margin-bottom: 28px;
-    padding: 14px;
-    background: rgba(180,143,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-  }
-  .setup-desc a { color: var(--glow2); }
-  .setup-error {
-    background: rgba(248,113,113,0.1);
-    border: 1px solid rgba(248,113,113,0.3);
-    border-radius: 7px;
-    padding: 10px 14px;
-    color: #fca5a5;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    margin-bottom: 16px;
-    display: none;
-  }
-  .setup-status {
-    text-align: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
-    margin-top: 14px;
-  }
 
   /* ── TOAST ── */
   #toast {
@@ -1412,37 +1382,6 @@
   }
   #console-btn.has-errors { color: #fca5a5; border-color: rgba(248,113,113,0.3); }
 
-  /* ── CONSOLE PANEL ── */
-  .console-panel {
-    position: fixed; inset: 0; z-index: 1000;
-    display: flex; align-items: flex-end; justify-content: flex-start;
-    padding: 0 0 0 var(--sidebar-w);
-    pointer-events: none;
-  }
-  .console-box {
-    width: 100%; max-width: 700px;
-    background: #06030f;
-    border: 1px solid var(--border-bright);
-    border-bottom: none;
-    border-radius: 14px 14px 0 0;
-    box-shadow: 0 -8px 40px rgba(0,0,0,0.7);
-    animation: slideUp 0.2s ease;
-    display: flex; flex-direction: column;
-    max-height: 40vh;
-    pointer-events: all;
-  }
-  .console-header {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-  .console-header-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; color: var(--text-dim);
-    letter-spacing: 0.12em; text-transform: uppercase;
-    flex: 1;
-  }
   .console-clear {
     background: transparent; border: 1px solid var(--border);
     color: var(--text-dim); font-family: 'JetBrains Mono', monospace;
@@ -1451,13 +1390,6 @@
     transition: all 0.15s;
   }
   .console-clear:hover { color: var(--text); border-color: var(--border-bright); }
-  .console-close {
-    background: transparent; border: 1px solid var(--border);
-    color: var(--text-dim); font-size: 13px;
-    padding: 3px 8px; border-radius: 5px; cursor: pointer;
-    transition: all 0.15s;
-  }
-  .console-close:hover { color: var(--text); border-color: var(--border-bright); }
   .console-log {
     flex: 1; overflow-y: auto;
     scrollbar-width: none;
@@ -1691,97 +1623,6 @@
     font-size: 11px; color: var(--glow2);
   }
 
-  /* ── DB PANEL ── */
-  .db-panel {
-    position: fixed; inset: 0; z-index: 1000;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(6px);
-    padding: 20px;
-    animation: fadeIn 0.15s ease;
-  }
-  .db-panel-box {
-    width: 100%; max-width: 500px;
-    background: linear-gradient(145deg, #0e0824, #060318);
-    border: 1px solid var(--border-bright);
-    border-radius: 18px;
-    padding: 32px;
-    box-shadow: 0 0 80px rgba(124,58,237,0.2);
-    animation: slideUp 0.2s ease;
-    max-height: 90vh; overflow-y: auto;
-    scrollbar-width: none;
-    position: relative;
-  }
-  .db-panel-box::-webkit-scrollbar { display: none; }
-  }
-  .db-panel-title {
-    font-family: 'Cinzel', serif;
-    font-size: 17px; color: var(--text-bright);
-    margin-bottom: 20px;
-    display: flex; align-items: center; gap: 10px;
-  }
-
-  /* Provider dropdown */
-  .provider-select-wrap {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  .provider-select-trigger {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    user-select: none;
-  }
-  .provider-select-trigger:hover { border-color: var(--border-bright); }
-  .provider-select-trigger.open { border-color: var(--glow); border-radius: 8px 8px 0 0; box-shadow: 0 0 12px rgba(180,143,255,0.15); }
-  .prov-sel-icon { font-size: 18px; flex-shrink: 0; }
-  .prov-sel-info { flex: 1; }
-  .prov-sel-name { font-family: 'Cinzel', serif; font-size: 13px; color: var(--text-bright); letter-spacing: 0.06em; }
-  .prov-sel-desc { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-dim); margin-top: 1px; }
-  .prov-sel-arrow { font-size: 9px; color: var(--text-dim); transition: transform 0.2s; flex-shrink: 0; }
-  .provider-select-trigger.open .prov-sel-arrow { transform: rotate(180deg); color: var(--glow); }
-
-  .provider-select-menu {
-    display: none;
-    position: absolute; top: 100%; left: 0; right: 0; z-index: 50;
-    background: #0d0820;
-    border: 1px solid var(--glow);
-    border-top: none;
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.7);
-  }
-  .provider-select-menu.open { display: block; }
-  .prov-option {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 14px;
-    cursor: pointer;
-    transition: background 0.15s;
-    border-bottom: 1px solid rgba(180,143,255,0.06);
-  }
-  .prov-option:last-child { border-bottom: none; }
-  .prov-option:hover { background: rgba(180,143,255,0.1); }
-  .prov-option.selected { background: rgba(180,143,255,0.15); }
-  .prov-option .prov-sel-name { color: var(--text); }
-  .prov-option:hover .prov-sel-name, .prov-option.selected .prov-sel-name { color: var(--text-bright); }
-  .prov-option.selected .prov-sel-desc { color: var(--glow); }
-
-  .db-fields { display: none; }
-  .db-fields.visible { display: block; }
-  .db-conn-status {
-    display: flex; align-items: center; gap: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; color: var(--text-dim);
-    margin-bottom: 16px;
-    padding: 8px 12px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-  }
 </style>
 <script>
   // Auto-detect favicon from assets/images/
@@ -1857,7 +1698,6 @@ function uid() { return Math.random().toString(36).slice(2,10)+Date.now().toStri
 
 // ── SESSION CONSOLE ──
 const sessionLog = [];
-let consolePanelOpen = false;
 
 (function interceptConsole() {
   const levels = ['error', 'warn', 'info'];
@@ -1872,21 +1712,17 @@ let consolePanelOpen = false;
       }).join(' ');
       sessionLog.push({ level, msg, time: new Date().toLocaleTimeString() });
       updateConsoleBadge();
-      if (consolePanelOpen) renderConsoleLog();
       if (document.getElementById('settings-console-log')) renderSettingsConsole();
     };
   });
 
-  // Also catch unhandled errors
   window.addEventListener('error', e => {
     sessionLog.push({ level: 'error', msg: e.message + (e.filename ? ` (${e.filename}:${e.lineno})` : ''), time: new Date().toLocaleTimeString() });
     updateConsoleBadge();
-    if (consolePanelOpen) renderConsoleLog();
   });
   window.addEventListener('unhandledrejection', e => {
     sessionLog.push({ level: 'error', msg: 'Unhandled promise rejection: ' + (e.reason?.message || String(e.reason)), time: new Date().toLocaleTimeString() });
     updateConsoleBadge();
-    if (consolePanelOpen) renderConsoleLog();
   });
 })();
 
@@ -1908,16 +1744,6 @@ function updateConsoleBadge() {
   }
 }
 
-function openConsolePanel() {
-  consolePanelOpen = true;
-  document.getElementById('console-panel').style.display = 'flex';
-  renderConsoleLog();
-}
-
-function closeConsolePanel() {
-  consolePanelOpen = false;
-  document.getElementById('console-panel').style.display = 'none';
-}
 
 function clearConsole() {
   sessionLog.length = 0;
@@ -2036,7 +1862,6 @@ let sbClient = null;
 let tursoClient = null;
 let dbProvider = null; // 'supabase' | 'turso'
 let dbConnected = false;
-let selectedProvider = null;
 
 // ── CREDENTIALS ──
 function getCreds() {
@@ -2059,145 +1884,6 @@ function saveCreds(provider, data) {
     localStorage.setItem('arcanum-turso-url', data.url);
     localStorage.setItem('arcanum-turso-token', data.token);
   }
-}
-
-// ── DB PANEL UI ──
-function openDBPanel() {
-  const creds = getCreds();
-  // Pre-fill saved values
-  if (document.getElementById('sb-url')) document.getElementById('sb-url').value = creds.sbUrl || '';
-  if (document.getElementById('sb-key')) document.getElementById('sb-key').value = creds.sbKey || '';
-  if (document.getElementById('turso-url')) document.getElementById('turso-url').value = creds.tursoUrl || '';
-  if (document.getElementById('turso-token')) document.getElementById('turso-token').value = creds.tursoToken || '';
-  document.getElementById('setup-error').style.display = 'none';
-  document.getElementById('setup-status').textContent = '';
-  // Update panel status
-  updatePanelStatus();
-  // Select saved provider or default to supabase
-  selectProvider(creds.provider || 'supabase');
-  document.getElementById('db-panel').style.display = 'flex';
-}
-
-function closeDBPanel() {
-  document.getElementById('db-panel').style.display = 'none';
-  // If still not connected, render the empty state anyway
-  if (!dbConnected) render();
-}
-
-function updatePanelStatus() {
-  const dot = document.getElementById('db-panel-dot');
-  const label = document.getElementById('db-conn-label');
-  if (dbConnected && dbProvider) {
-    dot.className = 'conn-dot';
-    label.textContent = `Connected · ${PROVIDERS[dbProvider]?.name || dbProvider}`;
-  } else {
-    dot.className = 'conn-dot disconnected';
-    label.textContent = 'Not connected';
-  }
-}
-
-const PROVIDERS = {
-  supabase: { icon: '⚡', name: 'Supabase', desc: 'Postgres · 500MB free' },
-  turso:    { icon: '🦅', name: 'Turso',    desc: 'SQLite · 9GB free' },
-};
-
-function toggleProviderMenu() {
-  const menu = document.getElementById('prov-menu');
-  const trigger = document.getElementById('prov-trigger');
-  const open = menu.classList.toggle('open');
-  trigger.classList.toggle('open', open);
-}
-
-function selectProvider(p) {
-  selectedProvider = p;
-  const info = PROVIDERS[p];
-  if (!info) return;
-  // Update trigger display
-  document.getElementById('prov-sel-icon').textContent = info.icon;
-  document.getElementById('prov-sel-name').textContent = info.name;
-  document.getElementById('prov-sel-desc').textContent = info.desc;
-  // Update selected state in menu
-  document.querySelectorAll('.prov-option').forEach(o => o.classList.toggle('selected', o.dataset.provider === p));
-  // Close menu
-  document.getElementById('prov-menu').classList.remove('open');
-  document.getElementById('prov-trigger').classList.remove('open');
-  // Show correct fields
-  document.querySelectorAll('.db-fields').forEach(f => f.classList.remove('visible'));
-  const fields = document.getElementById('fields-' + p);
-  if (fields) fields.classList.add('visible');
-  document.getElementById('db-connect-btn').disabled = false;
-}
-
-// Close provider menu on outside click
-document.addEventListener('click', e => {
-  if (!e.target.closest('.provider-select-wrap')) {
-    document.getElementById('prov-menu')?.classList.remove('open');
-    document.getElementById('prov-trigger')?.classList.remove('open');
-  }
-});
-
-// ── CONNECT ──
-async function connectDB() {
-  const errEl = document.getElementById('setup-error');
-  const statusEl = document.getElementById('setup-status');
-  errEl.style.display = 'none';
-  statusEl.textContent = 'Connecting...';
-  document.getElementById('db-connect-btn').disabled = true;
-
-  try {
-    if (selectedProvider === 'supabase') {
-      await connectSupabase();
-    } else if (selectedProvider === 'turso') {
-      await connectTurso();
-    }
-    dbConnected = true;
-    dbProvider = selectedProvider;
-    updateConnDot(true);
-    updatePanelStatus();
-    closeDBPanel();
-    await loadDB();
-    render();
-    showToast(`Connected to ${selectedProvider === 'supabase' ? 'Supabase' : 'Turso'} ✓`, 'success');
-  } catch(e) {
-    statusEl.textContent = '';
-    errEl.textContent = 'Connection failed: ' + (e.message || 'Check your credentials.');
-    errEl.style.display = 'block';
-    document.getElementById('db-connect-btn').disabled = false;
-  }
-}
-
-async function connectSupabase() {
-  const url = document.getElementById('sb-url').value.trim();
-  const key = document.getElementById('sb-key').value.trim();
-  if (!url || !key) throw new Error('Please enter both URL and key.');
-  if (!url.startsWith('https://')) throw new Error('URL must start with https://');
-  sbClient = null; // clear old instance first
-  const client = window.supabase.createClient(url, key);
-  // Retry once on network glitch
-  try {
-    await ensureSupabaseTables(client);
-  } catch(e) {
-    if (e.message?.includes('fetch')) {
-      await new Promise(r => setTimeout(r, 1200));
-      await ensureSupabaseTables(client);
-    } else throw e;
-  }
-  sbClient = client;
-  saveCreds('supabase', { url, key });
-}
-
-async function connectTurso() {
-  const url = document.getElementById('turso-url').value.trim();
-  const token = document.getElementById('turso-token').value.trim();
-  if (!url || !token) throw new Error('Please enter both URL and token.');
-  // Use fetch-based Turso HTTP API (works in browser without native module)
-  // Test connection
-  const resp = await tursoQuery(url, token, 'SELECT 1', []);
-  if (resp.error) throw new Error(resp.error);
-  // Ensure tables
-  await ensureTursoTables(url, token);
-  tursoClient = { url, token };
-  saveCreds('turso', { url, token });
 }
 
 // ── TURSO HTTP API ──
@@ -4312,103 +3998,6 @@ document.addEventListener('DOMContentLoaded', () => init().catch(e => console.er
     <div class="settings-content">
       <button class="settings-close" onclick="closeSettings()">✕</button>
       <div id="settings-pane" style="height:100%;display:flex;flex-direction:column"></div>
-    </div>
-  </div>
-</div>
-
-<!-- DB PANEL -->
-<div id="db-panel" style="display:none" class="db-panel" onclick="if(event.target===this&&dbConnected)closeDBPanel()">
-  <div class="db-panel-box">
-    <div class="db-panel-title">🗄 Database Connection</div>
-    <button onclick="closeDBPanel()" style="position:absolute;top:16px;right:16px;background:transparent;border:1px solid var(--border);color:var(--text-dim);font-size:14px;cursor:pointer;line-height:1;padding:4px 8px;border-radius:6px;transition:all 0.15s" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--border-bright)'" onmouseout="this.style.color='var(--text-dim)';this.style.borderColor='var(--border)'" title="Close">✕</button>
-
-    <!-- Current status -->
-    <div class="db-conn-status" id="db-conn-status">
-      <span class="conn-dot disconnected" id="db-panel-dot"></span>
-      <span id="db-conn-label">Not connected</span>
-    </div>
-
-    <!-- Provider selector -->
-    <div class="form-label" style="margin-bottom:8px">Provider</div>
-    <div class="provider-select-wrap">
-      <div class="provider-select-trigger" id="prov-trigger" onclick="toggleProviderMenu()">
-        <span class="prov-sel-icon" id="prov-sel-icon">⚡</span>
-        <div class="prov-sel-info">
-          <div class="prov-sel-name" id="prov-sel-name">Supabase</div>
-          <div class="prov-sel-desc" id="prov-sel-desc">Postgres · 500MB free</div>
-        </div>
-        <span class="prov-sel-arrow">▼</span>
-      </div>
-      <div class="provider-select-menu" id="prov-menu">
-        <div class="prov-option selected" data-provider="supabase" onclick="selectProvider('supabase')">
-          <span class="prov-sel-icon">⚡</span>
-          <div class="prov-sel-info">
-            <div class="prov-sel-name">Supabase</div>
-            <div class="prov-sel-desc">Postgres · 500MB free</div>
-          </div>
-        </div>
-        <div class="prov-option" data-provider="turso" onclick="selectProvider('turso')">
-          <span class="prov-sel-icon">🦅</span>
-          <div class="prov-sel-info">
-            <div class="prov-sel-name">Turso</div>
-            <div class="prov-sel-desc">SQLite · 9GB free</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Supabase fields -->
-    <div class="db-fields" id="fields-supabase">
-      <div class="form-group">
-        <label class="form-label">Project URL</label>
-        <input class="form-input" id="sb-url" placeholder="https://xxxx.supabase.co" autocomplete="off">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Publishable Key</label>
-        <input class="form-input" id="sb-key" type="password" placeholder="sb_publishable_... or eyJ..." autocomplete="off">
-      </div>
-      <div class="setup-desc" style="margin-bottom:16px">
-        Find these in your <a href="https://supabase.com/dashboard" target="_blank">Supabase dashboard</a> → Settings → API.<br>
-        Run the setup SQL to create <code style="color:var(--glow2);font-size:11px">arcanum_worlds</code>, <code style="color:var(--glow2);font-size:11px">arcanum_tabs</code>, <code style="color:var(--glow2);font-size:11px">arcanum_entries</code>.
-        <span onclick="copySetupSQL('supabase')" style="color:var(--glow2);text-decoration:underline;cursor:pointer;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px" title="Click to copy SQL to clipboard">SQL Setup</span>
-      </div>
-    </div>
-
-    <!-- Turso fields -->
-    <div class="db-fields" id="fields-turso">
-      <div class="form-group">
-        <label class="form-label">Database URL</label>
-        <input class="form-input" id="turso-url" placeholder="libsql://your-db.turso.io" autocomplete="off">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Auth Token</label>
-        <input class="form-input" id="turso-token" type="password" placeholder="eyJhbGciOiJFZ..." autocomplete="off">
-      </div>
-      <div class="setup-desc" style="margin-bottom:16px">
-        Find these in your <a href="https://app.turso.tech" target="_blank">Turso dashboard</a> → your database → Connect.<br>
-        Run the setup SQL to create the Arcanum tables in your Turso database.
-        <span onclick="copySetupSQL('turso')" style="color:var(--glow2);text-decoration:underline;cursor:pointer;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px" title="Click to copy SQL to clipboard">SQL Setup</span>
-      </div>
-    </div>
-
-    <div class="setup-error" id="setup-error"></div>
-    <div style="display:flex;gap:10px">
-      <button class="btn btn-primary" style="flex:1;padding:11px" id="db-connect-btn" onclick="connectDB()" disabled>Connect</button>
-    </div>
-    <div class="setup-status" id="setup-status"></div>
-  </div>
-</div>
-
-<!-- CONSOLE PANEL -->
-<div id="console-panel" style="display:none" class="console-panel">
-  <div class="console-box">
-    <div class="console-header">
-      <span class="console-header-title">Session Console</span>
-      <button class="console-clear" onclick="clearConsole()">Clear</button>
-      <button class="console-close" onclick="closeConsolePanel()">✕</button>
-    </div>
-    <div class="console-log" id="console-log">
-      <div class="console-empty">No errors this session.</div>
     </div>
   </div>
 </div>
