@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Arcanum</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --void: #04020d;
+    --glow: #b48fff;
+    --glow2: #7dd3fc;
+    --glow3: #f0abfc;
+    --text: #d4c8ff;
+    --text-dim: #7a6fa8;
+    --text-bright: #f0ecff;
+    --accent: #c084fc;
+    --border: rgba(180,143,255,0.15);
+    --border-bright: rgba(180,143,255,0.35);
+  }
+
+  body {
+    background: transparent;
+    color: var(--text);
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 24px 28px;
+    overflow: hidden;
+  }
+
+  .section {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--glow);
+    margin-bottom: 14px;
+  }
+
+  .app-name {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .app-tagline {
+    font-size: 14px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  .version-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .version-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(180,143,255,0.1);
+    border: 1px solid var(--border-bright);
+    color: var(--glow);
+  }
+
+  .version-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .support-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(180,143,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .support-row:last-child { margin-bottom: 0; }
+  .support-row span:first-child { font-size: 16px; }
+  .support-row a { color: var(--glow2); text-decoration: none; }
+  .support-row a:hover { text-decoration: underline; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  .changelog-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 18px;
+    background: rgba(180,143,255,0.06);
+    border: 1px solid var(--border-bright);
+    border-radius: 10px;
+    color: var(--text-bright);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .changelog-btn:hover {
+    background: rgba(180,143,255,0.12);
+    border-color: var(--glow);
+    color: var(--glow);
+  }
+  .changelog-btn-arrow { margin-left: auto; opacity: 0.5; }
+
+  .built-with {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 24px;
+    font-style: italic;
+  }
+  .built-with span { color: var(--glow3); }
+</style>
+</head>
+<body>
+
+  <div class="section">
+    <div class="app-name">ARCANUM</div>
+    <div class="app-tagline">A worldbuilding wiki for storytellers</div>
+    <div class="version-row">
+      <span class="version-badge">v1.2.0</span>
+      <span class="version-date">March 2026</span>
+    </div>
+    <p style="color:var(--text-dim);font-size:13px">A single-file worldbuilding app. Runs entirely in your browser, stores everything in your own Supabase or Turso database.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Support</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;align-items:stretch">
+      <div class="support-row" style="margin-bottom:0">
+        <span>🐛</span>
+        <span>Found a bug? <a href="https://github.com" target="_blank">GitHub</a></span>
+      </div>
+      <div class="support-row" style="margin-bottom:0">
+        <span>📖</span>
+        <span>Setup guide on <a href="https://github.com" target="_blank">README</a></span>
+      </div>
+    </div>
+    <div class="support-row">
+      <span>🗄</span>
+      <span>Database issues? Check the Console tab in Settings for error logs</span>
+    </div>
+  </div>
+
+  <div class="built-with">
+    Built with <span>♥</span> for worldbuilders everywhere<br>
+    by <a href="https://supernova0866.github.io/Lore/" target="_blank" style="color:var(--glow2);text-decoration:none;transition:opacity 0.15s" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Nova</a>
+  </div>
+
+<script>
+  window.addEventListener('message', e => {
+    if (e.data?.type === 'set-theme') {
+      document.documentElement.setAttribute('data-theme', e.data.theme || '');
+      applyThemeVars(e.data.vars || {});
+    }
+  });
+  function applyThemeVars(vars) {
+    const root = document.documentElement;
+    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+  }
+  window.parent.postMessage({ type: 'request-theme' }, '*');
+</script>
+</body>
+</html>
