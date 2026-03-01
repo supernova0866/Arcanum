@@ -1,0 +1,45 @@
+[
+  {
+    "version": "1.2.0",
+    "date": "2026-03-01",
+    "entries": [
+      { "tag": "new", "text": "Settings panel — unified Database, Console, Appearance, Export and About in one place" },
+      { "tag": "new", "text": "8 themes — Nebula, Ember, Abyss, Blood & Iron, Verdant, Parchment, Frost, Void" },
+      { "tag": "new", "text": "Theme transition animation — 3 second rebuild effect on theme switch" },
+      { "tag": "new", "text": "Export / Import system — download worlds as JSON, import from file" },
+      { "tag": "new", "text": "Changelog page — standalone page loaded from changelog.json" },
+      { "tag": "imp", "text": "Settings persist across reloads via localStorage" },
+      { "tag": "fix", "text": "Emoji tray closing immediately on open due to event bubbling race condition" },
+      { "tag": "fix", "text": "Themes not applying — specificity clash between :root and [data-theme] selectors" },
+      { "tag": "fix", "text": "Entry detail page not scrollable — body height was min-height instead of height" }
+    ]
+  },
+  {
+    "version": "1.1.0",
+    "date": "2026-02-01",
+    "entries": [
+      { "tag": "new", "text": "Focus Mode — distraction-free writing overlay for rich text fields with word counter" },
+      { "tag": "new", "text": "Global search across all worlds, tabs and entries" },
+      { "tag": "new", "text": "Entry status (Draft, Planned, In Progress, Complete) and star/pin system" },
+      { "tag": "new", "text": "@ entry linking in rich text fields — type @ to link to any entry" },
+      { "tag": "new", "text": "Custom tab icons — choose from emoji tray or custom icons in assets/icons/" },
+      { "tag": "imp", "text": "Auto-retry on network errors — Supabase fetch failures retry up to 3 times" },
+      { "tag": "imp", "text": "Rich text fields now save correctly — fixed silent skip bug on save" },
+      { "tag": "fix", "text": "Console interceptor now safely handles all environments" },
+      { "tag": "fix", "text": "Status badge alignment with tab badge in entry header" }
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "date": "2026-01-01",
+    "entries": [
+      { "tag": "new", "text": "Initial release — single-file worldbuilding wiki" },
+      { "tag": "new", "text": "Supabase and Turso database support" },
+      { "tag": "new", "text": "Worlds, tabs and entries with custom fields" },
+      { "tag": "new", "text": "Rich text editor with formatting toolbar" },
+      { "tag": "new", "text": "Relation fields — link entries across tabs" },
+      { "tag": "new", "text": "Card and table display modes" },
+      { "tag": "new", "text": "Duplicate entry functionality" }
+    ]
+  }
+]
