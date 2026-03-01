@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════
+   ARCANUM — THEMES
+   Loaded after index.html's inline styles.
+   Each theme overrides :root CSS variables only.
+   The default Nebula theme lives in index.html.
+═══════════════════════════════════════════════ */
+
+/* ── EMBER ── warm charcoal, amber/gold accents */
+:root[data-theme="ember"] {
+  --void: #0d0905;
+  --deep: #140c06;
+  --nebula1: #2a1506;
+  --nebula2: #1f1008;
+  --nebula3: #2e1a04;
+  --glow: #f59e0b;
+  --glow2: #fb923c;
+  --glow3: #fcd34d;
+  --star: #fff8ed;
+  --text: #e8d5b0;
+  --text-dim: #8a6d45;
+  --text-bright: #fff4e0;
+  --accent: #f59e0b;
+  --accent2: #fb923c;
+  --border: rgba(245,158,11,0.15);
+  --border-bright: rgba(245,158,11,0.35);
+  --card: rgba(20,12,6,0.7);
+}
+
+/* ── ABYSS ── deep black, cold cyan/teal */
+:root[data-theme="abyss"] {
+  --void: #020c0f;
+  --deep: #03121a;
+  --nebula1: #041e2e;
+  --nebula2: #021820;
+  --nebula3: #041525;
+  --glow: #22d3ee;
+  --glow2: #67e8f9;
+  --glow3: #a5f3fc;
+  --star: #e0f8ff;
+  --text: #b0e8f0;
+  --text-dim: #3d7a88;
+  --text-bright: #e0f8ff;
+  --accent: #22d3ee;
+  --accent2: #06b6d4;
+  --border: rgba(34,211,238,0.15);
+  --border-bright: rgba(34,211,238,0.35);
+  --card: rgba(3,18,26,0.7);
+}
+
+/* ── BLOOD & IRON ── dark, deep crimson */
+:root[data-theme="blood"] {
+  --void: #0c0304;
+  --deep: #130406;
+  --nebula1: #2a0608;
+  --nebula2: #1e0405;
+  --nebula3: #250507;
+  --glow: #f43f5e;
+  --glow2: #fb7185;
+  --glow3: #fda4af;
+  --star: #fff0f2;
+  --text: #e8b4bb;
+  --text-dim: #7a3a42;
+  --text-bright: #fff0f2;
+  --accent: #f43f5e;
+  --accent2: #e11d48;
+  --border: rgba(244,63,94,0.15);
+  --border-bright: rgba(244,63,94,0.35);
+  --card: rgba(19,4,6,0.7);
+}
+
+/* ── VERDANT ── dark forest, earthy greens */
+:root[data-theme="verdant"] {
+  --void: #030d05;
+  --deep: #05120a;
+  --nebula1: #0a2412;
+  --nebula2: #071a0e;
+  --nebula3: #0c2818;
+  --glow: #4ade80;
+  --glow2: #86efac;
+  --glow3: #bbf7d0;
+  --star: #f0fdf4;
+  --text: #a7d4b4;
+  --text-dim: #3d6b4a;
+  --text-bright: #f0fdf4;
+  --accent: #4ade80;
+  --accent2: #22c55e;
+  --border: rgba(74,222,128,0.15);
+  --border-bright: rgba(74,222,128,0.35);
+  --card: rgba(5,18,10,0.7);
+}
+
+/* ── PARCHMENT ── warm off-white, sepia/brown — LIGHT */
+:root[data-theme="parchment"] {
+  --void: #f5ede0;
+  --deep: #ede0cc;
+  --nebula1: #e8d5b7;
+  --nebula2: #ecdcbf;
+  --nebula3: #e4d0aa;
+  --glow: #92400e;
+  --glow2: #b45309;
+  --glow3: #d97706;
+  --star: #1c0f00;
+  --text: #3d2008;
+  --text-dim: #a07850;
+  --text-bright: #1c0f00;
+  --accent: #92400e;
+  --accent2: #b45309;
+  --border: rgba(146,64,14,0.2);
+  --border-bright: rgba(146,64,14,0.4);
+  --card: rgba(237,224,204,0.8);
+  --sidebar-bg: #e8d5b7;
+}
+
+/* ── FROST ── clean light grey/white, ice blue — LIGHT */
+:root[data-theme="frost"] {
+  --void: #f1f5f9;
+  --deep: #e8eef5;
+  --nebula1: #dce7f2;
+  --nebula2: #e2eaf4;
+  --nebula3: #d4e2ef;
+  --glow: #0284c7;
+  --glow2: #0ea5e9;
+  --glow3: #38bdf8;
+  --star: #0c1a2e;
+  --text: #1e3a5f;
+  --text-dim: #6b90b4;
+  --text-bright: #0c1a2e;
+  --accent: #0284c7;
+  --accent2: #0369a1;
+  --border: rgba(2,132,199,0.18);
+  --border-bright: rgba(2,132,199,0.38);
+  --card: rgba(220,231,242,0.8);
+  --sidebar-bg: #dce7f2;
+}
+
+/* ── VOID ── pure black, minimal white */
+:root[data-theme="void"] {
+  --void: #000000;
+  --deep: #050505;
+  --nebula1: #0f0f0f;
+  --nebula2: #0a0a0a;
+  --nebula3: #111111;
+  --glow: #e2e2e2;
+  --glow2: #a0a0a0;
+  --glow3: #c0c0c0;
+  --star: #ffffff;
+  --text: #c8c8c8;
+  --text-dim: #505050;
+  --text-bright: #ffffff;
+  --accent: #e2e2e2;
+  --accent2: #a0a0a0;
+  --border: rgba(255,255,255,0.08);
+  --border-bright: rgba(255,255,255,0.18);
+  --card: rgba(10,10,10,0.8);
+}
+
+/* ── LIGHT THEME OVERRIDES ──
+   Some structural elements need extra nudges for light themes */
+:root[data-theme="parchment"] #sidebar,
+:root[data-theme="frost"] #sidebar {
+  background: var(--nebula1);
+  border-right-color: var(--border);
+}
+
+:root[data-theme="parchment"] .topbar,
+:root[data-theme="frost"] .topbar {
+  background: rgba(232,213,183,0.9);
+  border-bottom-color: var(--border);
+}
+
+:root[data-theme="frost"] .topbar {
+  background: rgba(220,231,242,0.9);
+}
+
+:root[data-theme="parchment"] #stars-canvas,
+:root[data-theme="frost"] #stars-canvas {
+  opacity: 0.06;
+}
+
+:root[data-theme="parchment"] .world-card,
+:root[data-theme="frost"] .world-card {
+  background: var(--card);
+  border-color: var(--border);
+}
+
+:root[data-theme="parchment"] .modal,
+:root[data-theme="parchment"] .modal-wide,
+:root[data-theme="frost"] .modal,
+:root[data-theme="frost"] .modal-wide {
+  background: var(--deep);
+  border-color: var(--border-bright);
+}
+
+:root[data-theme="parchment"] .form-input,
+:root[data-theme="parchment"] .form-textarea,
+:root[data-theme="frost"] .form-input,
+:root[data-theme="frost"] .form-textarea {
+  background: var(--void);
+  border-color: var(--border);
+  color: var(--text-bright);
+}
+
+:root[data-theme="parchment"] .rte-editor,
+:root[data-theme="frost"] .rte-editor {
+  background: var(--void);
+  color: var(--text-bright);
+}
+
+:root[data-theme="parchment"] .entry-card,
+:root[data-theme="frost"] .entry-card {
+  background: var(--card);
+  border-color: var(--border);
+}
+
+:root[data-theme="parchment"] .field-block,
+:root[data-theme="frost"] .field-block {
+  background: var(--card);
+  border-color: var(--border);
+}
